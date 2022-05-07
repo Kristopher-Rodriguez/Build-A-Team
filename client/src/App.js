@@ -2,17 +2,61 @@ import "./App.css";
 import DisplayAllPokemon from "./components/DisplayAllPokemon";
 import HomePage from "./components/HomePage";
 import NavBar from "./components/NavBar";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PokemonProfile from "./components/PokemonProfile";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import "@fontsource/roboto";
+import { useState } from "react";
 
 function App() {
+  const [pokemonId, setPokemonId] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [allPokemon, setAllPokemon] = useState([]);
+  const { id } = useParams();
+
   return (
     <div className="container mx-auto bg-slate-100 App">
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/pokemon" element={<DisplayAllPokemon />} />
+          <Route
+            path="/"
+            element={
+              <HomePage
+                pokemonId={pokemonId}
+                setPokemonId={setPokemonId}
+                loading={loading}
+                setLoading={setLoading}
+                allPokemon={allPokemon}
+                setAllPokemon={setAllPokemon}
+              />
+            }
+          />
+          <Route
+            path="/pokemon"
+            element={
+              <DisplayAllPokemon
+                pokemonId={pokemonId}
+                setPokemonId={setPokemonId}
+                loading={loading}
+                setLoading={setLoading}
+                allPokemon={allPokemon}
+                setAllPokemon={setAllPokemon}
+              />
+            }
+          />
+          <Route
+            path="/pokemon/:id"
+            element={
+              <PokemonProfile
+                pokemonId={pokemonId}
+                setPokemonId={setPokemonId}
+                loading={loading}
+                setLoading={setLoading}
+                allPokemon={allPokemon}
+                setAllPokemon={setAllPokemon}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

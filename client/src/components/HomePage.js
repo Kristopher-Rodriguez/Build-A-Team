@@ -1,15 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
 
-const HomePage = () => {
+const HomePage = (props) => {
+  const { pokemonId, setPokemonId, loading, setLoading } = props;
   const [findPokemon, setFindPokemon] = useState("");
   const [pokemonSearchResult, setPokemonSearchResult] = useState("");
-  const [pokemonId, setPokemonId] = useState("");
+  // const [pokemonId, setPokemonId] = useState("");
   const [error, setError] = useState("");
   const url = "https://pokeapi.co/api/v2/pokemon/";
 
   const searchForPokemon = (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log(findPokemon);
     axios
       .get(url + findPokemon)
@@ -17,19 +19,19 @@ const HomePage = () => {
         console.log(res.data.name);
         setPokemonSearchResult(res.data.name);
         setPokemonId(res.data.id);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err.response.data);
         setError(err.response.data);
+        setLoading(false);
       });
+    setError("");
+    setPokemonId("");
   };
-
-  console.log(pokemonSearchResult);
-  console.log(pokemonId);
 
   return (
     <div>
-      <h1>Welcome to the PokeDex!</h1>
       <form onSubmit={searchForPokemon}>
         <div className="container mx-auto flex flex-col m-2">
           <label htmlFor="pokemon">Enter number or name of Pokemon: </label>
@@ -39,25 +41,28 @@ const HomePage = () => {
               className="border border-solid border-black"
               type="text"
             />
-            <button
-              type="submit"
-              className="m-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            >
+            <button type="submit" className="btn btn-info p-1 m-2">
               Search
             </button>
           </div>
         </div>
       </form>
-      <div className="flex flex-col justify-center items-center">
-        <p className="capitalize font-bold">{`${pokemonSearchResult}`}</p>
+      <div className="d-flex justify-content-center align-items-center">
         {pokemonId && (
-          <img
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
-            alt="pokemon-sprite"
-            className="w-25"
-          />
+          <div>
+            <p className="text-capitalize fw-bold">{`${pokemonSearchResult}`}</p>
+            <img
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
+              alt="pokemon-sprite"
+              className=""
+            />
+          </div>
         )}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error ? (
+          <p style={{ color: "red" }}>Pokemon {error.toLowerCase()}!</p>
+        ) : (
+          <p></p>
+        )}
       </div>
     </div>
   );
