@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const DisplayAllPokemon = (props) => {
-  const {loading, setLoading, allPokemon, setAllPokemon} = props;
+  const { loading, setLoading, allPokemon, setAllPokemon } = props;
   const [currentUrl, setCurrentUrl] = useState(
     "https://pokeapi.co/api/v2/pokemon"
   );
@@ -16,7 +17,6 @@ const DisplayAllPokemon = (props) => {
     setPrevious(res.data.previous);
     getPokemon(res.data.results);
     setLoading(false);
-    console.log(allPokemon);
   };
 
   const getPokemon = async (res) => {
@@ -33,6 +33,7 @@ const DisplayAllPokemon = (props) => {
 
   useEffect(() => {
     console.log("useEffect fired");
+    setAllPokemon([]);
     updatePokemon();
   }, [currentUrl]);
 
@@ -45,6 +46,8 @@ const DisplayAllPokemon = (props) => {
     setAllPokemon([]);
     setCurrentUrl(previous);
   };
+
+  console.log(allPokemon);
 
   return (
     <div className="container mx-auto">
@@ -59,8 +62,9 @@ const DisplayAllPokemon = (props) => {
         {allPokemon.map((pokemon, index) => (
           <div
             key={index}
-            className="shadow-sm d-flex justify-content-center align-items-center border border-dark bg-primary bg-gradient p-1 rounded m-2"
+            className="shadow-sm d-flex justify-content-center align-items-center border border-dark bg-gradient p-1 rounded m-2"
           >
+            <Link to={`/pokemon/${pokemon.id}`}>
             <p className="text-capitalize fw-bold m-1">
               {pokemon.id}. {pokemon.name}
             </p>
@@ -69,6 +73,7 @@ const DisplayAllPokemon = (props) => {
               alt="pokemon-sprite"
               className="h-25"
             />
+            </Link>
           </div>
         ))}
       </div>

@@ -8,7 +8,7 @@ import "@fontsource/roboto";
 import { useState } from "react";
 
 function App() {
-  const [pokemonId, setPokemonId] = useState("");
+  // const [pokemonId, setPokemonId] = useState("");
   const [loading, setLoading] = useState(true);
   const [allPokemon, setAllPokemon] = useState([]);
   const { id } = useParams();
@@ -22,8 +22,6 @@ function App() {
             path="/"
             element={
               <HomePage
-                pokemonId={pokemonId}
-                setPokemonId={setPokemonId}
                 loading={loading}
                 setLoading={setLoading}
                 allPokemon={allPokemon}
@@ -35,8 +33,6 @@ function App() {
             path="/pokemon"
             element={
               <DisplayAllPokemon
-                pokemonId={pokemonId}
-                setPokemonId={setPokemonId}
                 loading={loading}
                 setLoading={setLoading}
                 allPokemon={allPokemon}
@@ -48,8 +44,6 @@ function App() {
             path="/pokemon/:id"
             element={
               <PokemonProfile
-                pokemonId={pokemonId}
-                setPokemonId={setPokemonId}
                 loading={loading}
                 setLoading={setLoading}
                 allPokemon={allPokemon}
