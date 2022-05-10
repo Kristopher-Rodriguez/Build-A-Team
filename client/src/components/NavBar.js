@@ -12,6 +12,9 @@ const NavBar = () => {
           <Link className="mx-2 nav-link nav-item" to="/pokemon">
             All Pokemon
           </Link>
+          <Link className="mx-2 nav-link nav-item" to="/buildteam">
+            Build Your Team
+          </Link>
         </div>
       </nav>
     </div>

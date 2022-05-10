@@ -1,11 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const HomePage = (props) => {
-  const { loading, setLoading } = props;
+  const { loading, setLoading, pokemonId, setPokemonId } = props;
   const [findPokemon, setFindPokemon] = useState("");
   const [pokemonSearchResult, setPokemonSearchResult] = useState("");
-  const [pokemonId, setPokemonId] = useState("");
+  // const [pokemonId, setPokemonId] = useState("");
   const [error, setError] = useState("");
   const url = "https://pokeapi.co/api/v2/pokemon/";
 
@@ -31,11 +32,13 @@ const HomePage = (props) => {
     setPokemonSearchResult("");
   };
 
+  if (loading) return "Page Loading...";
+
   return (
     <div>
       <form onSubmit={searchForPokemon}>
         <div className="d-flex flex-column flex-wrap justify-content-center align-items-center">
-          <label htmlFor="pokemon">Enter number or name of Pokemon: </label>
+          <label className="m-2" htmlFor="pokemon">Enter number or name of Pokemon: </label>
           <div>
             <input
               onChange={(e) => setFindPokemon(e.target.value.toLowerCase())}
@@ -51,12 +54,16 @@ const HomePage = (props) => {
       <div className="d-flex justify-content-center align-items-center p-1 rounded m-2 w-25 container mx-auto">
         {pokemonId && (
           <div>
-            <p className="text-capitalize fw-bold">{`${pokemonSearchResult}`}</p>
-            <img
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
-              alt="pokemon-sprite"
-              className="w-75"
-            />
+            <Link className="text-decoration-none" to={`/pokemon/${pokemonId}`}>
+              <div>
+                <p className="text-capitalize fw-bold">{`${pokemonSearchResult}`}</p>
+                <img
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemonId}.png`}
+                  alt="pokemon-sprite"
+                  className="w-75"
+                />
+              </div>
+            </Link>
           </div>
         )}
         {error ? (

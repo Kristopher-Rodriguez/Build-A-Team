@@ -3,15 +3,15 @@ import DisplayAllPokemon from "./components/DisplayAllPokemon";
 import HomePage from "./components/HomePage";
 import NavBar from "./components/NavBar";
 import PokemonProfile from "./components/PokemonProfile";
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "@fontsource/roboto";
 import { useState } from "react";
+import TeamForm from "./components/TeamForm";
 
 function App() {
-  // const [pokemonId, setPokemonId] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [pokemonId, setPokemonId] = useState("");
+  const [loading, setLoading] = useState(false);
   const [allPokemon, setAllPokemon] = useState([]);
-  const { id } = useParams();
 
   return (
     <div className="container mx-auto bg-slate-100 App">
@@ -26,6 +26,8 @@ function App() {
                 setLoading={setLoading}
                 allPokemon={allPokemon}
                 setAllPokemon={setAllPokemon}
+                pokemonId={pokemonId}
+                setPokemonId={setPokemonId} 
               />
             }
           />
@@ -48,6 +50,19 @@ function App() {
                 setLoading={setLoading}
                 allPokemon={allPokemon}
                 setAllPokemon={setAllPokemon}
+              />
+            }
+          />
+          <Route
+            path="/buildteam"
+            element={
+              <TeamForm
+                loading={loading}
+                setLoading={setLoading}
+                allPokemon={allPokemon}
+                setAllPokemon={setAllPokemon}
+                pokemonId={pokemonId}
+                setPokemonId={setPokemonId} 
               />
             }
           />

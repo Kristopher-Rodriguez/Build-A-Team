@@ -20,14 +20,22 @@ const PokemonProfile = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [id]);
 
   if (loading) return "Page Loading...";
 
   return (
     <div>
       <div className="m-2 p-2">
-        <h1 className="text-capitalize">{pokeInfo.name}</h1>
+        <div className="d-flex mx-auto justify-content-around">
+          <Link to={`/pokemon/${parseInt(pokeInfo.id) - 1}`}>
+            <button className="btn btn-success">Previous</button>
+          </Link>
+          <h1 className="text-capitalize">{pokeInfo.name}</h1>
+          <Link to={`/pokemon/${parseInt(pokeInfo.id) + 1}`}>
+            <button className="btn btn-success">Next</button>
+          </Link>
+        </div>
         <img
           className="w-25"
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeInfo.id}.png`}
@@ -37,13 +45,17 @@ const PokemonProfile = (props) => {
       <div>
         <h2>Type(s):</h2>
         {pokeInfo.types?.map((type, index) => (
-          <div className="text-capitalize" key={index}>{type.type.name}</div>
+          <div className="text-capitalize" key={index}>
+            {type.type.name}
+          </div>
         ))}
       </div>
       <div>
         <h2>Abilities:</h2>
         {pokeInfo.abilities?.map((ability, index) => (
-          <div className="text-capitalize" key={index}>{ability.ability.name}</div>
+          <div className="text-capitalize" key={index}>
+            {ability.ability.name}
+          </div>
         ))}
       </div>
       <div>
