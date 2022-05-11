@@ -7,9 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "@fontsource/roboto";
 import { useState } from "react";
 import TeamForm from "./components/TeamForm";
+import TeamDetails from "./components/TeamDetails";
 
 function App() {
-  const [pokemonId, setPokemonId] = useState("");
   const [loading, setLoading] = useState(false);
   const [allPokemon, setAllPokemon] = useState([]);
 
@@ -26,8 +26,6 @@ function App() {
                 setLoading={setLoading}
                 allPokemon={allPokemon}
                 setAllPokemon={setAllPokemon}
-                pokemonId={pokemonId}
-                setPokemonId={setPokemonId} 
               />
             }
           />
@@ -61,11 +59,10 @@ function App() {
                 setLoading={setLoading}
                 allPokemon={allPokemon}
                 setAllPokemon={setAllPokemon}
-                pokemonId={pokemonId}
-                setPokemonId={setPokemonId} 
               />
             }
           />
+          <Route path="/teams/:id" element={<TeamDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

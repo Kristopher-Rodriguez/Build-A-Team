@@ -3,6 +3,7 @@
   font-family: "Roboto";
 }
 
-/* .pokemon-team-img {
-  height: 50px;
-} */
+.team-error {
+  color: red;
+  font-weight: bold;
+}

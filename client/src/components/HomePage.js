@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import DisplayAllTeams from "./DisplayAllTeams";
 
 const HomePage = (props) => {
-  const { loading, setLoading, pokemonId, setPokemonId } = props;
+  const { loading, setLoading } = props;
   const [findPokemon, setFindPokemon] = useState("");
   const [pokemonSearchResult, setPokemonSearchResult] = useState("");
-  // const [pokemonId, setPokemonId] = useState("");
+  const [pokemonId, setPokemonId] = useState("");
   const [error, setError] = useState("");
   const url = "https://pokeapi.co/api/v2/pokemon/";
 
@@ -38,7 +39,9 @@ const HomePage = (props) => {
     <div>
       <form onSubmit={searchForPokemon}>
         <div className="d-flex flex-column flex-wrap justify-content-center align-items-center">
-          <label className="m-2" htmlFor="pokemon">Enter number or name of Pokemon: </label>
+          <label className="m-2" htmlFor="pokemon">
+            Enter number or name of Pokemon:{" "}
+          </label>
           <div>
             <input
               onChange={(e) => setFindPokemon(e.target.value.toLowerCase())}
@@ -71,6 +74,9 @@ const HomePage = (props) => {
         ) : (
           <p></p>
         )}
+      </div>
+      <div>
+        <DisplayAllTeams />
       </div>
     </div>
   );

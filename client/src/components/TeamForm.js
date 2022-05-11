@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const TeamForm = (props) => {
-  const { pokemonId, setpokemonId } = props;
+const TeamForm = () => {
   //Search Bar
   const [pokeDex, setPokeDex] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredName, setFilteredName] = useState("");
+  const [teamError, setTeamError] = useState("");
 
   //Team Info
   const [teamName, setTeamName] = useState("");
@@ -57,9 +57,10 @@ const TeamForm = (props) => {
       });
   };
 
+  //Function for search, shows user a search result
   const handleSearch = (newSearchQuery) => {
     setSearchQuery(newSearchQuery);
-    pokeDex.map((pokemon) => {
+    pokeDex.map((pokemon, index) => {
       if (pokemon.name.includes(searchQuery)) {
         setFilteredName(pokemon);
       }
@@ -71,6 +72,7 @@ const TeamForm = (props) => {
     handleSearch(e);
   };
 
+  //Function to add a Pokemon to your team
   const addPokemonToTeam = () => {
     if (pokeOne === "") {
       setPokeOne(filteredName.name);
@@ -91,7 +93,8 @@ const TeamForm = (props) => {
       setPokeSix(filteredName.name);
       return pokeSix;
     } else {
-      return "Team is full!";
+      setTeamError("Team is full!");
+      return teamError;
     }
   };
 
@@ -150,7 +153,7 @@ const TeamForm = (props) => {
             </button>
             {searchQuery && (
               <p className="text-capitalize">
-                <span className="fw-bold">Search Result:</span>{" "}
+                <span className="fw-bold">Pokemon to be added:</span>{" "}
                 {filteredName.name}
               </p>
             )}
@@ -161,64 +164,125 @@ const TeamForm = (props) => {
             </div>
             {pokeOne && (
               <div className="d-flex justify-content-center align-items-center">
-                <p className="text-capitalize mt-2">1. {pokeOne}</p>
+                <p className="text-capitalize mt-2">{pokeOne}</p>
                 <img
                   className="mb-2"
                   src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokeOne}.png`}
                   alt="pokemon-1"
                 />
+                <button
+                  onClick={() => {
+                    setPokeOne("");
+                    setTeamError("");
+                  }}
+                  className="btn-small btn-danger ms-1"
+                  type="button"
+                >
+                  Remove
+                </button>
               </div>
             )}
             {pokeTwo && (
               <div className="d-flex justify-content-center align-items-center">
-                <p className="text-capitalize mt-2">2. {pokeTwo}</p>
+                <p className="text-capitalize mt-2">{pokeTwo}</p>
                 <img
                   className="mb-2"
                   src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokeTwo}.png`}
                   alt="pokemon-2"
                 />
+                <button
+                  onClick={() => {
+                    setPokeTwo("");
+                    setTeamError("");
+                  }}
+                  className="btn-small btn-danger ms-1"
+                  type="button"
+                >
+                  Remove
+                </button>
               </div>
             )}
             {pokeThree && (
               <div className="d-flex justify-content-center align-items-center">
-                <p className="text-capitalize mt-2">3. {pokeThree}</p>
+                <p className="text-capitalize mt-2">{pokeThree}</p>
                 <img
                   className="mb-2"
                   src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokeThree}.png`}
                   alt="pokemon-3"
                 />
+                <button
+                  onClick={() => {
+                    setPokeThree("");
+                    setTeamError("");
+                  }}
+                  className="btn-small btn-danger ms-1"
+                  type="button"
+                >
+                  Remove
+                </button>
               </div>
             )}
             {pokeFour && (
               <div className="d-flex justify-content-center align-items-center">
-                <p className="text-capitalize mt-2">4. {pokeFour}</p>
+                <p className="text-capitalize mt-2">{pokeFour}</p>
                 <img
                   className="mb-2"
                   src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokeFour}.png`}
                   alt="pokemon-4"
                 />
+                <button
+                  onClick={() => {
+                    setPokeFour("");
+                    setTeamError("");
+                  }}
+                  className="btn-small btn-danger ms-1"
+                  type="button"
+                >
+                  Remove
+                </button>
               </div>
             )}
             {pokeFive && (
               <div className="d-flex justify-content-center align-items-center">
-                <p className="text-capitalize mt-2">5. {pokeFive}</p>
+                <p className="text-capitalize mt-2">{pokeFive}</p>
                 <img
                   className="mb-2"
                   src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokeFive}.png`}
                   alt="pokemon-5"
                 />
+                <button
+                  onClick={() => {
+                    setPokeFive("");
+                    setTeamError("");
+                  }}
+                  className="btn-small btn-danger ms-1"
+                  type="button"
+                >
+                  Remove
+                </button>
               </div>
             )}
             {pokeSix && (
               <div className="d-flex justify-content-center align-items-center">
-                <p className="text-capitalize mt-2">6. {pokeSix}</p>
+                <p className="text-capitalize mt-2">{pokeSix}</p>
                 <img
                   className="mb-2"
                   src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokeSix}.png`}
                   alt="pokemon-6"
                 />
+                <button
+                  onClick={() => {
+                    setPokeSix("");
+                    setTeamError("");
+                  }}
+                  className="btn-small btn-danger ms-1"
+                  type="button"
+                >
+                  Remove
+                </button>
               </div>
             )}
+            {teamError && <p className="team-error">{teamError}</p>}
           </div>
         </div>
         <div className="my-2">
