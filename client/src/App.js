@@ -8,13 +8,14 @@ import "@fontsource/roboto";
 import { useState } from "react";
 import TeamForm from "./components/TeamForm";
 import TeamDetails from "./components/TeamDetails";
+import UpdateTeam from "./components/UpdateTeam";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [allPokemon, setAllPokemon] = useState([]);
 
   return (
-    <div className="container mx-auto bg-slate-100 App">
+    <div className="container mx-auto App">
       <BrowserRouter>
         <NavBar />
         <Routes>
@@ -63,6 +64,7 @@ function App() {
             }
           />
           <Route path="/teams/:id" element={<TeamDetails />} />
+          <Route path="/teams/:id/edit" element={<UpdateTeam />} />
         </Routes>
       </BrowserRouter>
     </div>

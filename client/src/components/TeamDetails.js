@@ -7,13 +7,15 @@ const TeamDetails = () => {
   const [teams, setTeams] = useState([]);
   const [teamName, setTeamName] = useState("");
   const [trainerName, setTrainerName] = useState("");
-  const [pokeOne, setPokeOne] = useState("");
-  const [pokeTwo, setPokeTwo] = useState("");
-  const [pokeThree, setPokeThree] = useState("");
-  const [pokeFour, setPokeFour] = useState("");
-  const [pokeFive, setPokeFive] = useState("");
-  const [pokeSix, setPokeSix] = useState("");
+  // const [pokeOne, setPokeOne] = useState("");
+  // const [pokeTwo, setPokeTwo] = useState("");
+  // const [pokeThree, setPokeThree] = useState("");
+  // const [pokeFour, setPokeFour] = useState("");
+  // const [pokeFive, setPokeFive] = useState("");
+  // const [pokeSix, setPokeSix] = useState("");
   const navigate = useNavigate();
+
+  const [pokeArray, setPokeArray] = useState([]);
 
   useEffect(() => {
     axios
@@ -23,15 +25,25 @@ const TeamDetails = () => {
         setTeams(data);
         setTeamName(data.teamName);
         setTrainerName(data.trainerName);
-        setPokeOne(data.pokeOne);
-        setPokeTwo(data.pokeTwo);
-        setPokeThree(data.pokeThree);
-        setPokeFour(data.pokeFour);
-        setPokeFive(data.pokeFive);
-        setPokeSix(data.pokeSix);
+        // setPokeOne(data.pokeOne);
+        // setPokeTwo(data.pokeTwo);
+        // setPokeThree(data.pokeThree);
+        // setPokeFour(data.pokeFour);
+        // setPokeFive(data.pokeFive);
+        // setPokeSix(data.pokeSix);
+        setPokeArray([
+          data.pokeOne,
+          data.pokeTwo,
+          data.pokeThree,
+          data.pokeFour,
+          data.pokeFive,
+          data.pokeSix,
+        ]);
       })
       .catch((err) => console.log(err));
   }, [id]);
+
+  console.log(pokeArray);
 
   const handleDeleteTeam = (id) => {
     axios
@@ -45,46 +57,43 @@ const TeamDetails = () => {
         setTeams(filteredTeams);
       })
       .catch((err) => console.log(err));
-      navigate("/")
+    navigate("/");
   };
 
   return (
     <div>
-      <div className="container mt-3">
-        <h4>{teamName}</h4>
-      </div>
+      <div className="container mt-3" style={{ width: "18rem" }}></div>
       <div className="d-flex flex-wrap container justify-content-center mt-3">
-        <div className="mt-2">
-          <p className="fw-bold">
-            Trainer Name: <span className="fw-normal">{trainerName}</span>
-          </p>
-          <p className="fw-bold">
-            Pokemon 1: <span className="fw-normal text-capitalize">{pokeOne}</span>
-          </p>
-          <p className="fw-bold">
-            Pokemon 2: <span className="fw-normal text-capitalize">{pokeTwo}</span>
-          </p>
-          <p className="fw-bold">
-            Pokemon 3: <span className="fw-normal text-capitalize">{pokeThree}</span>
-          </p>
-          <p className="fw-bold">
-            Pokemon 4: <span className="fw-normal text-capitalize">{pokeFour}</span>
-          </p>
-          <p className="fw-bold">
-            Pokemon 5: <span className="fw-normal text-capitalize">{pokeFive}</span>
-          </p>
-          <p className="fw-bold">
-            Pokemon 6: <span className="fw-normal text-capitalize">{pokeSix}</span>
-          </p>
+        <div className="mb-2">
+          <h2>Team: {teamName}</h2>
+          <div className="card">
+            <h5 className="fw-bold card-header">
+              Trainer Name: <span className="fw-normal">{trainerName}</span>
+            </h5>
+            {pokeArray.map((pokemon, index) => (
+              <div className="d-flex justify-content-center mt-1">
+                <p className="fw-bold mt-2">
+                  Pokemon {index + 1}:{" "}
+                  <span className="fw-normal text-capitalize">{pokemon}</span>
+                </p>
+                <img
+                  className="mb-2"
+                  src={`https://img.pokemondb.net/sprites/sword-shield/icon/${pokemon}.png`}
+                  alt="pokemon"
+                />
+              </div>
+            ))}
+            <div className="card-body">
+              <button
+                className="btn btn-danger"
+                onClick={() => handleDeleteTeam(teams._id)}
+              >
+                {" "}
+                Delete {teamName}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-      <button
-          className="btn btn-danger"
-          onClick={() => handleDeleteTeam(teams._id)}
-        >
-          &#127968; Delete {teamName}
-        </button>
       </div>
     </div>
   );

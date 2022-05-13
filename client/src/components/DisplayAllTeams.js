@@ -21,7 +21,7 @@ const DisplayAllTeams = () => {
       <div className="pb-2">
         <h4>Current Teams:</h4>
       </div>
-      <table className="mx-auto table table-striped table-bordered w-75">
+      <table className="mx-auto table table-hover table-striped table-bordered w-75">
         <thead>
           <tr>
             <th scope="col">Team Name</th>

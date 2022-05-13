@@ -39,6 +39,7 @@ const HomePage = (props) => {
     <div>
       <form onSubmit={searchForPokemon}>
         <div className="d-flex flex-column flex-wrap justify-content-center align-items-center">
+          <h4>Poke Search</h4>
           <label className="m-2" htmlFor="pokemon">
             Enter number or name of Pokemon:{" "}
           </label>
@@ -46,7 +47,7 @@ const HomePage = (props) => {
             <input
               onChange={(e) => setFindPokemon(e.target.value.toLowerCase())}
               className="border border-solid border-black"
-              type="text"
+              type="search"
             />
             <button type="submit" className="btn btn-info p-1 m-2">
               Search
@@ -60,11 +61,19 @@ const HomePage = (props) => {
             <Link className="text-decoration-none" to={`/pokemon/${pokemonId}`}>
               <div>
                 <p className="text-capitalize fw-bold">{`${pokemonSearchResult}`}</p>
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemonId}.png`}
-                  alt="pokemon-sprite"
-                  className="w-75"
-                />
+                {pokemonId <= 649 ? (
+                  <img
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`}
+                    alt="pokemon-sprite"
+                    className="w-75"
+                  />
+                ) : (
+                  <img
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
+                    alt="pokemon-sprite"
+                    className="w-75"
+                  />
+                )}
               </div>
             </Link>
           </div>

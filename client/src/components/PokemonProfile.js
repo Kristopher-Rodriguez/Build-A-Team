@@ -31,7 +31,7 @@ const PokemonProfile = (props) => {
           <Link to={`/pokemon/${parseInt(pokeInfo.id) - 1}`}>
             <button className="btn btn-success">Previous</button>
           </Link>
-          <h1 className="text-capitalize">{pokeInfo.name}</h1>
+          <h1 className="text-capitalize">{pokeInfo.id}. {pokeInfo.name}</h1>
           <Link to={`/pokemon/${parseInt(pokeInfo.id) + 1}`}>
             <button className="btn btn-success">Next</button>
           </Link>
