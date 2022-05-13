@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 .App {
   text-align: center;
   font-family: "Roboto";
@@ -7,3 +9,23 @@
   color: red;
   font-weight: bold;
 }
+
+.pokeball {
+  height: 25px;
+  width: 25px;
+}
+
+.trainers {
+  height: 100px;
+  width: 100px;
+}
+
+.team-name {
+  font-family: 'VT323', monospace;
+  font-size: 50px;
+}
+
+/* .browse {
+  font-family: 'VT323', monospace;
+  font-size: 50px;
+} */

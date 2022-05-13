@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import pokeballs from "../assets/pokeballs.png"
 
 const TeamDetails = () => {
   const { id } = useParams();
@@ -62,16 +63,19 @@ const TeamDetails = () => {
 
   return (
     <div>
-      <div className="container mt-3" style={{ width: "18rem" }}></div>
       <div className="d-flex flex-wrap container justify-content-center mt-3">
-        <div className="mb-2">
-          <h2>Team: {teamName}</h2>
-          <div className="card">
-            <h5 className="fw-bold card-header">
+        <div className="">
+          <div className="">
+          <img className="w-25" src={pokeballs} alt="" />
+          <h2 className="team-name">Team: {teamName}</h2>
+          <img className="w-25" src={pokeballs} alt="" />
+          </div>
+          <div className="card mx-auto" style={{width: "20rem"}}>
+            <h5 className="fw-bold card-header bg-dark text-light">
               Trainer Name: <span className="fw-normal">{trainerName}</span>
             </h5>
             {pokeArray.map((pokemon, index) => (
-              <div className="d-flex justify-content-center mt-1">
+              <div className="d-flex justify-content-center mt-2">
                 <p className="fw-bold mt-2">
                   Pokemon {index + 1}:{" "}
                   <span className="fw-normal text-capitalize">{pokemon}</span>

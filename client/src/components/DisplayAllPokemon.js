@@ -50,45 +50,54 @@ const DisplayAllPokemon = (props) => {
   console.log(allPokemon);
 
   return (
-    <div className="container mx-auto">
-      <h2>Browse Pokemon:</h2>
-      <h3 className="text-xs">(Click for more information)</h3>
-      {loading && (
-        <>
-          <h1>Loading...</h1>
-        </>
-      )}
-      <div className="d-flex flex-wrap justify-content-center align-items-center">
-        {allPokemon.map((pokemon, index) => (
-          <div
-            key={index}
-            className="shadow-sm d-flex justify-content-center align-items-center border border-dark bg-gradient p-1 rounded m-2"
-          >
-            <Link to={`/pokemon/${pokemon.id}`}>
-            <p className="text-capitalize fw-bold m-1">
-              {pokemon.id}. {pokemon.name}
-            </p>
-            <img
-              src={pokemon.sprites.front_default}
-              alt="pokemon-sprite"
-              className="h-25"
-            />
-            </Link>
+    <>
+      <div className="bg-danger text-light">
+        <div className="container mx-auto browse">
+          <h2>Browse Pokemon:</h2>
+          <h3 className="text-xs pb-2">(Click for more information)</h3>
+        </div>
+      </div>
+        {loading && (
+          <div class="spinner-border text-danger" role="status">
+            <span class="visually-hidden">Loading...</span>
           </div>
-        ))}
-      </div>
-      <div className="d-flex justify-content-around align-items-center">
-        {previous && (
-          <button onClick={goToPrevPage} className="m-2 btn btn-success">
-            {" "}
-            Previous
-          </button>
         )}
-        <button onClick={goToNextPage} className="m-2 btn btn-success">
-          Next
-        </button>
+      <div className="container mx-auto">
+        <div className="d-flex flex-wrap justify-content-center align-items-center">
+          {allPokemon.map((pokemon, index) => (
+            <div
+              key={index}
+              className="shadow-sm d-flex justify-content-center align-items-center border border-dark bg-gradient p-1 rounded m-2"
+            >
+              <Link
+                className="text-decoration-none"
+                to={`/pokemon/${pokemon.id}`}
+              >
+                <p className="text-capitalize fw-bold m-1">
+                  {pokemon.id}. {pokemon.name}
+                </p>
+                <img
+                  src={pokemon.sprites.front_default}
+                  alt="pokemon-sprite"
+                  className="h-25"
+                />
+              </Link>
+            </div>
+          ))}
+        </div>
+        <div className="d-flex justify-content-around align-items-center">
+          {previous && (
+            <button onClick={goToPrevPage} className="m-2 btn btn-success">
+              {" "}
+              Previous
+            </button>
+          )}
+          <button onClick={goToNextPage} className="m-2 btn btn-success">
+            Next
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

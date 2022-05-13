@@ -15,7 +15,7 @@ function App() {
   const [allPokemon, setAllPokemon] = useState([]);
 
   return (
-    <div className="container mx-auto App">
+    <div className="App">
       <BrowserRouter>
         <NavBar />
         <Routes>
