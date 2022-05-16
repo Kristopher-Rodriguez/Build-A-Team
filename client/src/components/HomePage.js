@@ -58,6 +58,11 @@ const HomePage = (props) => {
         </div>
       </div>
       <div className="d-flex justify-content-center align-items-center p-1 rounded m-2 w-25 container mx-auto">
+        {loading && (
+          <div class="spinner-border text-danger" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        )}
         {pokemonId && (
           <div>
             <Link className="text-decoration-none" to={`/pokemon/${pokemonId}`}>

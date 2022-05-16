@@ -19,7 +19,7 @@ const DisplayAllTeams = () => {
   return (
     <div className="mx-auto">
       <div className="pb-2">
-        <h4>Current Teams:</h4>
+        <h4 className="current-teams">Current Teams:</h4>
       </div>
       <table className="mx-auto table table-hover table-secondary table-striped table-bordered border-dark w-75">
         <thead>

@@ -67,7 +67,7 @@ const TeamDetails = () => {
         <div className="">
           <div className="">
           <img className="w-25" src={pokeballs} alt="" />
-          <h2 className="team-name">Team: {teamName}</h2>
+          <h2 className="team-name">{teamName}</h2>
           <img className="w-25" src={pokeballs} alt="" />
           </div>
           <div className="card mx-auto" style={{width: "20rem"}}>
